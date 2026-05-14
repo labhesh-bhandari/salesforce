@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Support Chatbot</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .chat-container{
+            width:450px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+            overflow:hidden;
+        }
+
+        .header{
+            padding:15px;
+            text-align:center;
+            font-size:20px;
+            font-weight:bold;
+            background:#333;
+            color:white;
+        }
+
+        .chat-box{
+            height:400px;
+            padding:15px;
+            overflow-y:auto;
+            background:#fafafa;
+        }
+
+        .message{
+            margin-bottom:12px;
+            padding:10px;
+            border-radius:8px;
+            max-width:80%;
+        }
+
+        .user{
+            margin-left:auto;
+            background:#d1e7ff;
+        }
+
+        .bot{
+            background:#eeeeee;
+        }
+
+        .input-area{
+            display:flex;
+            padding:10px;
+            gap:10px;
+        }
+
+        input{
+            flex:1;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            padding:10px 18px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            background:#333;
+            color:white;
+        }
+
+        button:hover{
+            background:#555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <div class="header">
+            Shopping Support Chatbot
+        </div>
+
+        <div class="chat-box" id="chatBox">
+
+            <div class="message bot">
+                Hello! How can I help you today?
+            </div>
+
+        </div>
+
+        <div class="input-area">
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Type your message..."
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+        </div>
+
+    </div>
+
+
+<script>
+
+function getBotResponse(message){
+
+    message = message.toLowerCase();
+
+
+    // Greetings
+    if(
+        message.includes("hi") ||
+        message.includes("hello") ||
+        message.includes("hey") ||
+        message.includes("good morning")
+    ){
+        return "Hello! Welcome to our shopping support.";
+    }
+
+
+    // Products
+    else if(
+        message.includes("product") ||
+        message.includes("item") ||
+        message.includes("catalog") ||
+        message.includes("goods")
+    ){
+        return "We offer electronics, clothing, accessories, and home products.";
+    }
+
+
+    // Order tracking
+    else if(
+        message.includes("order") ||
+        message.includes("track") ||
+        message.includes("shipment") ||
+        message.includes("package")
+    ){
+        return "You can track your order from the Orders section.";
+    }
+
+
+    // Delivery
+    else if(
+        message.includes("delivery") ||
+        message.includes("shipping") ||
+        message.includes("dispatch")
+    ){
+        return "Standard delivery takes 3 to 5 business days.";
+    }
+
+
+    // Return
+    else if(
+        message.includes("return") ||
+        message.includes("exchange")
+    ){
+        return "Products can be returned or exchanged within 7 days.";
+    }
+
+
+    // Refund
+    else if(
+        message.includes("refund") ||
+        message.includes("money back")
+    ){
+        return "Refunds are processed within 5 to 7 business days.";
+    }
+
+
+    // Payment
+    else if(
+        message.includes("payment") ||
+        message.includes("pay") ||
+        message.includes("upi") ||
+        message.includes("card") ||
+        message.includes("transaction")
+    ){
+        return "We accept UPI, cards, net banking, and wallets.";
+    }
+
+
+    // Offers
+    else if(
+        message.includes("offer") ||
+        message.includes("discount") ||
+        message.includes("coupon") ||
+        message.includes("sale")
+    ){
+        return "Current offers are available on our homepage.";
+    }
+
+
+    // Cancellation
+    else if(
+        message.includes("cancel") ||
+        message.includes("cancellation")
+    ){
+        return "Orders can be cancelled before dispatch.";
+    }
+
+
+    // Account
+    else if(
+        message.includes("login") ||
+        message.includes("signup") ||
+        message.includes("account") ||
+        message.includes("password")
+    ){
+        return "You can manage your account settings from your profile.";
+    }
+
+
+    // Support
+    else if(
+        message.includes("contact") ||
+        message.includes("help") ||
+        message.includes("support")
+    ){
+        return "Contact us at support@store.com";
+    }
+
+
+    // Goodbye
+    else if(
+        message.includes("bye") ||
+        message.includes("thanks") ||
+        message.includes("thank you")
+    ){
+        return "Thank you for visiting. Have a great day!";
+    }
+
+
+    else{
+        return "For this query, please contact our customer support." +
+            "<br><br>" +
+            "Customer Care: +91 9876543210" +
+            "<br>" +
+            "Email: support@store.com";
+    }
+}
+
+
+
+function addMessage(text, className){
+
+    let chatBox = document.getElementById("chatBox");
+
+    let messageDiv = document.createElement("div");
+
+    messageDiv.classList.add("message");
+    messageDiv.classList.add(className);
+
+    messageDiv.innerText = text;
+
+    chatBox.appendChild(messageDiv);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+
+function sendMessage(){
+
+    let input = document.getElementById("userInput");
+
+    let userMessage = input.value.trim();
+
+
+    if(userMessage === ""){
+        return;
+    }
+
+
+    addMessage(userMessage, "user");
+
+
+    let botReply = getBotResponse(userMessage);
+
+
+    setTimeout(function(){
+        addMessage(botReply, "bot");
+    }, 300);
+
+
+    input.value = "";
+}
+
+
+
+// Enter key support
+document.getElementById("userInput")
+.addEventListener("keypress", function(event){
+
+    if(event.key === "Enter"){
+        sendMessage();
+    }
+
+});
+
+</script>
+
+</body>
+</html>

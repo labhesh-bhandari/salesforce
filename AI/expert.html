@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Expert System</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+
+        .container{
+            width:450px;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        .input-group{
+            margin-bottom:12px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:5px;
+            font-weight:bold;
+        }
+
+        input{
+            width:100%;
+            padding:8px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:15px;
+            border:none;
+            background:#333;
+            color:white;
+            font-size:16px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#555;
+        }
+
+        .result{
+            margin-top:20px;
+            padding:15px;
+            background:#f8f8f8;
+            border-radius:5px;
+            line-height:1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Employee Performance Evaluation</h2>
+
+    <div class="input-group">
+        <label>Attendance (%)</label>
+        <input type="number" id="attendance">
+    </div>
+
+    <div class="input-group">
+        <label>Task Completion (%)</label>
+        <input type="number" id="task">
+    </div>
+
+    <div class="input-group">
+        <label>Teamwork (%)</label>
+        <input type="number" id="teamwork">
+    </div>
+
+    <div class="input-group">
+        <label>Punctuality (%)</label>
+        <input type="number" id="punctuality">
+    </div>
+
+    <div class="input-group">
+        <label>Communication Skills (%)</label>
+        <input type="number" id="communication">
+    </div>
+
+    <div class="input-group">
+        <label>Problem Solving (%)</label>
+        <input type="number" id="problem">
+    </div>
+
+    <div class="input-group">
+        <label>Work Quality (%)</label>
+        <input type="number" id="quality">
+    </div>
+
+    <div class="input-group">
+        <label>Leadership (%)</label>
+        <input type="number" id="leadership">
+    </div>
+
+    <button onclick="evaluateEmployee()">
+        Evaluate Performance
+    </button>
+
+    <div class="result" id="result">
+        Enter values and click evaluate.
+    </div>
+
+</div>
+
+
+<script>
+
+function evaluateEmployee(){
+
+    let attendance = Number(document.getElementById("attendance").value);
+    let task = Number(document.getElementById("task").value);
+    let teamwork = Number(document.getElementById("teamwork").value);
+    let punctuality = Number(document.getElementById("punctuality").value);
+    let communication = Number(document.getElementById("communication").value);
+    let problem = Number(document.getElementById("problem").value);
+    let quality = Number(document.getElementById("quality").value);
+    let leadership = Number(document.getElementById("leadership").value);
+
+
+    let scores = [
+        attendance,
+        task,
+        teamwork,
+        punctuality,
+        communication,
+        problem,
+        quality,
+        leadership
+    ];
+
+
+    for(let score of scores){
+        if(score < 0 || score > 100 || isNaN(score)){
+            document.getElementById("result").innerHTML =
+                "Please enter valid values between 0 and 100.";
+            return;
+        }
+    }
+
+
+    let average =
+        scores.reduce((sum, value) => sum + value, 0) / scores.length;
+
+
+    let performance = "";
+    let recommendation = "";
+
+
+    // Base rules
+    if(average >= 90){
+        performance = "Excellent";
+        recommendation = "Promotion Recommended";
+    }
+    else if(average >= 80){
+        performance = "Very Good";
+        recommendation = "Bonus + Recognition";
+    }
+    else if(average >= 70){
+        performance = "Good";
+        recommendation = "Salary Increment";
+    }
+    else if(average >= 60){
+        performance = "Average";
+        recommendation = "Needs Improvement";
+    }
+    else{
+        performance = "Poor";
+        recommendation = "Training Required";
+    }
+
+
+    // Special expert rules
+    let specialRules = [];
+
+    if(attendance < 50){
+        specialRules.push(
+            "Low Attendance: Needs Immediate Attention"
+        );
+    }
+
+    if(quality < 40){
+        specialRules.push(
+            "Quality Training Required"
+        );
+    }
+
+    if(leadership > 90 && average > 85){
+        specialRules.push(
+            "Management Potential Identified"
+        );
+    }
+
+
+    let output =
+        "<b>Average Score:</b> " + average.toFixed(2) + "%<br>" +
+        "<b>Performance:</b> " + performance + "<br>" +
+        "<b>Recommendation:</b> " + recommendation;
+
+
+    if(specialRules.length > 0){
+        output +=
+            "<br><br><b>Special Rules Triggered:</b><br>" +
+            specialRules.join("<br>");
+    }
+
+
+    document.getElementById("result").innerHTML = output;
+}
+
+</script>
+
+</body>
+</html>
