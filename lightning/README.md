@@ -1,15 +1,16 @@
 # Employee Management System using Salesforce Lightning App Builder
 
 ## Objective
+
 Develop an Employee Management application in Salesforce using Lightning App Builder (Drag and Drop) with field validations.
 
 The system validates:
 
 - Employee Name cannot be empty and must contain at least 3 characters.
 - Employee ID must be greater than 0 and unique.
-- Salary must be between 10,000 and 500,000.
+- Salary must be greater than 10,000 and less than 500,000.
 - Email must follow valid email format.
-- Department must be selected.
+- Department must be selected from the available list.
 - Joining Date cannot be a future date.
 
 ---
@@ -50,6 +51,8 @@ Create the following fields:
 
 Click Save.
 
+---
+
 ## 2. Salary
 
 - Data Type = Currency
@@ -57,12 +60,16 @@ Click Save.
 
 Click Save.
 
+---
+
 ## 3. Email
 
 - Data Type = Email
 - Label = Email
 
 Click Save.
+
+---
 
 ## 4. Department
 
@@ -74,11 +81,13 @@ Values:
 HR  
 IT  
 Finance  
-Marketing
+Marketing  
 
 Check **Required**
 
 Click Save.
+
+---
 
 ## 5. Joining Date
 
@@ -180,7 +189,27 @@ Click Save.
 
 ---
 
-# Step 4: Create Lightning Record Page
+# Step 4: Create Lightning App
+
+1. Search:
+
+   App Manager
+
+2. Click:
+
+   New Lightning App
+
+3. Enter:
+
+   App Name = Employee Data Management
+
+4. Click:
+
+   Next → Next → Next → Save & Finish
+
+---
+
+# Step 5: Create Lightning Record Page
 
 1. Search:
 
@@ -203,7 +232,7 @@ Click Save.
 
 ---
 
-# Step 5: Drag and Drop Record Detail
+# Step 6: Drag and Drop Record Detail
 
 1. Search:
 
@@ -215,7 +244,7 @@ Click Save.
 
 ---
 
-# Step 6: Activate the Page
+# Step 7: Activate the Page
 
 1. Click:
 
@@ -233,7 +262,7 @@ Click Save.
 
 ---
 
-# Step 7: Create Custom Object Tab
+# Step 8: Create Custom Object Tab
 
 1. Search:
 
@@ -257,7 +286,7 @@ Click Save.
 
 ---
 
-# Step 8: Configure Lightning App
+# Step 9: Configure Lightning App
 
 1. Search:
 
@@ -279,7 +308,7 @@ Click Save.
 
    User Profiles
 
-2. Select:
+2. Search:
 
    System Administrator
 
@@ -303,7 +332,7 @@ Click Save.
 
 ---
 
-# Step 9: Run the Application
+# Step 10: Run the Application
 
 1. Click the **9 dots (App Launcher)**.
 
